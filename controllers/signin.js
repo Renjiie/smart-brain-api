@@ -1,7 +1,7 @@
 const handleSignin=(req,res,bcrypt,db)=>{
 	const {email,password} = req.body;
 	if(!email||!password ){
-		return alert(res.status(400).json('Enter a valid email or password'));
+		return res.status(400).json('Enter a valid email or password');
 	}
 	db.select('email','hash').from('login')
 	.where('email','=',email)
@@ -13,12 +13,12 @@ const handleSignin=(req,res,bcrypt,db)=>{
 			.then(user=>{
 				res.json(user[0])
 			})
-			.catch(err => res.status(400).json('unable to get user'))
+			.catch(alert(err => res.status(400).json('unable to get user')))
 		}	else{
-			res.status(400).json('wrong credentials')
+			alert(res.status(400).json('wrong credentials'))
 		}
 	})
-	.catch(err => res.status(400).json('wrong credentials'))
+	.catch(alert(err => res.status(400).json('wrong credentials')))
 }
 
 module.exports = {
